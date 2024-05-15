@@ -5,6 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler";
 
 
 const getAllTasks = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['Task']
 
   const tasks = await Task.find()
     .select("-__v -createdAt -updatedAt");
@@ -15,6 +16,7 @@ const getAllTasks = asyncHandler(async (req, res) => {
 
 
 const getTaskById = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['Task']
 
   const { taskId } = req.params;
 
@@ -31,6 +33,7 @@ const getTaskById = asyncHandler(async (req, res) => {
 
 
 const createTask = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['Task']
 
   const { title, description, status } = req.body;
 
@@ -41,6 +44,7 @@ const createTask = asyncHandler(async (req, res) => {
 });
 
 const updateTask = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['Task']
 
   const { taskId } = req.params;
   const { title, description, status } = req.body;
@@ -60,6 +64,7 @@ const updateTask = asyncHandler(async (req, res) => {
 });
 
 const deleteTask = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['Task']
 
   const { taskId } = req.params;
 

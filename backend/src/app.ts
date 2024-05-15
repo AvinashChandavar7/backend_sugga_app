@@ -23,7 +23,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
 
+// Routes
+import taskRouter from "./routes/task.routes";
 
+app.use('/api/v1/tasks', taskRouter);
 
 const options = { explorer: true, }
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput, options));

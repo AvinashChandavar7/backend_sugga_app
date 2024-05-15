@@ -9,11 +9,6 @@ export interface ITask extends Document {
 
 const taskSchema = new Schema<ITask>(
   {
-    id: {
-      type: String,
-      required: [true, "A task must have a id"],
-      unique: true,
-    },
     title: {
       type: String,
       required: [true, "A task must have a title"],
@@ -31,6 +26,8 @@ const taskSchema = new Schema<ITask>(
   },
   { timestamps: true }
 );
+
+// taskSchema.index({ title: 1 });
 
 const Task = models.Task || model<ITask>("Task", taskSchema);
 

@@ -78,4 +78,42 @@ const loginUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { userId: user._id }, "User successfully login"));
 })
 
-export { registerUser, loginUser }
+const tokenValidation = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['User-Auth']
+
+  return res.status(200)
+    .json(new ApiResponse(200, { userId: req.userId }, "Token Validation"));
+})
+
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['User-Auth']
+
+  const userId = req.userId;
+
+  const user = await User.findById(userId).select("-password");
+
+  if (!user) {
+    throw new ApiError(400, "Invalid user")
+  }
+
+  return res.status(200)
+    .json(new ApiResponse(200, { user }, "get User Details successfully "));
+});
+
+const logoutUser = asyncHandler(async (req, res) => {
+  //#swagger.tags = ['User-Auth']
+
+  return res.status(200)
+    .cookie("auth_Token", "", { expires: new Date(0) })
+    .json(new ApiResponse(200, "User successfully LogOut"));
+})
+
+
+export {
+  registerUser,
+  loginUser,
+  getCurrentUser,
+  tokenValidation,
+  logoutUser
+}

@@ -25,7 +25,9 @@ app.use(cookieParser());
 
 // Routes
 import taskRouter from "./routes/task.routes";
+import userRouter from "./routes/user.routes";
 
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tasks', taskRouter);
 
 const options = { explorer: true, }
